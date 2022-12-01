@@ -38,39 +38,39 @@ class WebSocketClient extends WebSocketListener {
         // localhostとか127.0.0.1ではないことに注意
         Request.Builder request = new Request.Builder();
         request.url("ws://10.0.2.2:8080/demo/WebSocketServer");
-        //request.url("localhost://10.0.2.2:8080/demo/WebSocketServer");
-
         webSocket = client.newWebSocket(request.build(), this);
     }
 
     public void send(String message) {
+        System.out.println("kota: send message/ "+message);
         webSocket.send(message);
     }
 
     @Override
     public void onOpen(WebSocket webSocket, Response response) {
-        System.out.println("WebSocket opened successfully");
+        System.out.println("kota: WebSocket opened successfully");
     }
 
     @Override
     public void onMessage(WebSocket webSocket, String text) {
-        System.out.println("Received text message: " + text);
+        System.out.println("kota: Received text message/ " + text);
     }
 
     @Override
     public void onMessage(WebSocket webSocket, ByteString bytes) {
-        System.out.println("Received binary message: " + bytes.hex());
+        System.out.println("kota: Received binary message/ " + bytes.hex());
     }
 
     @Override
     public void onClosing(WebSocket webSocket, int code, String reason) {
+        System.out.println("kota: Connection closed start/ " + code + reason);
         webSocket.close(1000, null);
-        System.out.println("Connection closed: " + code + reason);
+        System.out.println("kota: Connection closed end/ " + code + reason);
     }
 
     @Override
     public void onFailure(WebSocket webSocket, Throwable t, Response response) {
-        System.out.println("Connection failed" + t.getLocalizedMessage());
+        System.out.println("kota: Connection failed/ " + t.getLocalizedMessage());
     }
 
 }
