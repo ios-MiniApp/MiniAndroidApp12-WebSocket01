@@ -21,9 +21,9 @@ public class MainActivity extends AppCompatActivity {
 
         TextView textView = (TextView) findViewById(R.id.textView);
         textView.setText("Hello World!");
-
         WebSocketClient webSocketClient = new WebSocketClient();
         webSocketClient.send("Hello from Android");
+
     }
 }
 
@@ -37,7 +37,9 @@ class WebSocketClient extends WebSocketListener {
         // 接続先のエンドポイント
         // localhostとか127.0.0.1ではないことに注意
         Request.Builder request = new Request.Builder();
-        request.url("ws://10.0.2.2:8080/demo/WebSocketServer");
+        //request.url("ws://10.0.2.2:8080/demo/WebSocketServer");
+        request.url("ws://10.0.2.2:8080/demo/WebSocketDemo");
+
         webSocket = client.newWebSocket(request.build(), this);
     }
 
